@@ -218,7 +218,7 @@ const isPrime = (num) => {
  */
 function toNumber(value, def) {
   try {
-    if (Number.isNaN(value)) throw new Error();
+    if (Number.isNaN(Number(value))) throw new Error();
     return Number(value);
   } catch (e) {
     return def;
