@@ -1,3 +1,4 @@
+
 /* ************************************************************************************************
  *                                                                                                *
  * Plese read the following tutorial before implementing tasks:                                   *
@@ -110,6 +111,8 @@ function fromJSON(proto, json) {
  *
  *  For more examples see unit tests.
  */
+
+/* eslint max-classes-per-file: "off" */
 
 class BaseSelector {
   constructor(value) {
@@ -253,6 +256,7 @@ const cssSelectorBuilder = {
     return new BaseSelector(combinedResult);
   },
 };
+
 
 module.exports = {
   Rectangle,
