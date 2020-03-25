@@ -7,10 +7,12 @@
 
 
 /**
- * Return Promise object that is resolved with string value === 'Hooray!!! She said "Yes"!',
- * if boolean value === true is passed, resolved with string value === 'Oh no, she said "No".',
- * if boolean value === false is passed, and rejected
- * with error message === 'Wrong parameter is passed! Ask her again.',
+ * Return Promise object that is
+ * resolved with string value === 'Hooray!!! She said "Yes"!',
+ * if boolean value === true is passed,
+ * resolved with string value === 'Oh no, she said "No".',
+ * if boolean value === false is passed,
+ * and rejected with error message === 'Wrong parameter is passed! Ask her again.',
  * if is not boolean value passed
  *
  * @param {boolean} isPositiveAnswer
@@ -28,8 +30,16 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
+function willYouMarryMe(isPositiveAnswer) {
+  const positiveReaction = 'Hooray!!! She said "Yes"!';
+  const negativeReaction = 'Oh no, she said "No".';
+  const errorReaction = 'Wrong parameter is passed! Ask her again.';
+
+  return new Promise((resolutionFunc, rejectionFunc) => {
+    if (isPositiveAnswer === true) resolutionFunc(positiveReaction);
+    else if (isPositiveAnswer === false) resolutionFunc(negativeReaction);
+    else rejectionFunc(new Error(errorReaction));
+  });
 }
 
 
@@ -48,9 +58,16 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
-}
+const processAllPromises = (array) => new Promise((resolve, reject) => {
+  const arr = [...array]; let c = arr.length; const
+    results = [];
+  arr.map(Promise.resolve, Promise)
+    .map((p, i) => p.then((v) => {
+      results[i] = v;
+      c -= 1;
+      if (c === 0) resolve(results);
+    }, reject));
+});
 
 /**
  * Return Promise object that should be resolved with value received from
@@ -71,9 +88,7 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
-}
+const getFastestPromise = (array) => Promise.race(array);
 
 /**
  * Return Promise object that should be resolved with value that is
@@ -92,8 +107,15 @@ function getFastestPromise(/* array */) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
+
+function chainPromises(promises, func) {
+  return new Promise((resolve) => {
+    const result = [];
+    for (let i = 0; i < promises.length; i += 1) {
+      promises[i].then((value) => result.push(value), (value) => new Error(value));
+    }
+    resolve(result);
+  }).then((result) => result.reduce(func));
 }
 
 module.exports = {
