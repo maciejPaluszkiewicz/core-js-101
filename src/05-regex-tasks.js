@@ -31,10 +31,8 @@
  *
  * @return {RegExp}
  */
-function getRegexForGuid() {
-  throw new Error('Not implemented');
-}
 
+const getRegexForGuid = () => new RegExp('^{[0-9,a-f,A-F]{8}-[0-9,a-f,A-F]{4}-[0-9,a-f,A-F]{4}-[0-9,a-f,A-F]{4}-[0-9,a-f,A-F]{12}}$');
 
 /**
  * Returns the regexp that matches all the strings from first column
@@ -53,10 +51,8 @@ function getRegexForGuid() {
  * @return {RegExp}
  *
  */
-function getRegexForPitSpot() {
-  throw new Error('Not implemented');
-}
 
+const getRegexForPitSpot = () => new RegExp('^(s|r|pi)');
 
 /**
  * Returns the password validator regex.
@@ -78,9 +74,7 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
-}
+const getPasswordValidator = (minLength) => new RegExp(`^(?!.*[_])(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z0-9].{${minLength},}$`);
 
 
 module.exports = {
